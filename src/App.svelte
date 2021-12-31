@@ -1,6 +1,14 @@
 <script lang="ts">
 	export let name: string;
 	export let tasks: string[];
+
+	function addTask(task: string) {
+		console.log(`Adding a task: ${task}.`);
+	}
+
+	function removeTask(id: number) {
+		console.log(`Remove task number ${id}.`);
+	}
 </script>
 
 <main>
