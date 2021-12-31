@@ -5,10 +5,20 @@
 	interface Task {
 		id: number;
 		description: string;
+		priority: 'low' | 'medium' | 'high';
+		complete: boolean;
 	}
 
 	let tasks: Task[] = [];
 	let newTask: string = "";
+
+	// Dynamic variables
+	$: completedTasks = tasks.filter((task) => {
+		return task.complete;
+	});
+	$: incompleteTasks = tasks.filter((task) => {
+		return !task.complete;
+	});
 
 	// Set initial array of tasks, since passing in Task objects from App was not working.
 	// It's possible this was because the App component was not aware of the Task interface,
@@ -16,7 +26,9 @@
 	tasks = taskDescriptions.map((taskDescription, i) => {
 		return {
 			id: i + 1,
-			description: taskDescription
+			description: taskDescription,
+			priority: 'low',
+			complete: false
 		};
 	});
 
@@ -25,7 +37,9 @@
 
 		let newTask: Task = {
 			id: tasks.length + 1,
-			description: description
+			description: description,
+			priority: 'low',
+			complete: false
 		};
 
 		tasks = [...tasks, newTask];
@@ -63,8 +77,9 @@
 			<input class="add-task-input" placeholder="Add a task" bind:value={newTask} on:keypress={handleAddTaskInputKeystroke} />
 			<button class="add-task-button" disabled={newTask.replaceAll(" ", "") === ""} on:click={(e) => {addTask(newTask);}}>Add Task</button>
 		</div>
-		{#each tasks as task}
+		{#each incompleteTasks as task}
 			<div class="task" data-task-id={task.id}>
+				<input type="checkbox" class="task-complete-checkbox" />
 				<span class="task-text">Task #{task.id}: {task.description}</span>
 				<button class="task-delete" on:click={handleTaskDeleteClick} data-task-id={task.id}>x</button>
 			</div>
