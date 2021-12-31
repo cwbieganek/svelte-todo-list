@@ -4,6 +4,9 @@
 
 	export let task: Task;
 
+	let complete: boolean; // True if input is checked
+	task.complete = complete; // Match the value of complete
+
 	interface Task {
 		id: number;
 		description: string;
@@ -17,8 +20,8 @@
 </script>
 
 <div class="task">
-	<input type="checkbox" class="task-complete-checkbox" />
-	<span class="task-text">{task.description}</span>
+	<input type="checkbox" class="task-complete-checkbox" bind:checked={complete} />
+	<span class="task-text">{task.description} {complete ? '(complete)' : ''}</span>
 	<button class="task-delete" on:click={handleTaskDeleteClick}>x</button>
 </div>
 
