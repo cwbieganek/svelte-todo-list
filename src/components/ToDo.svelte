@@ -47,7 +47,8 @@
 		tasks = [...tasks, newTask];
 	}
 
-	function removeTask(id: number): void {
+	function removeTask(e: CustomEvent): void {
+		let id: number = e.detail;
 		console.log(`Removing task number ${id}.`);
 		tasks = tasks.filter((task) => {
 			return task.id !== id;
@@ -64,12 +65,6 @@
 			addTask(newTask);
 		}
 	}
-
-	function handleTaskDeleteClick(e: MouseEvent) {
-		let target = e.target as HTMLButtonElement;
-		let taskId = +target.getAttribute('data-task-id');
-		removeTask(taskId);
-	}
 </script>
 
 <div>
@@ -79,8 +74,8 @@
 			<input class="add-task-input" placeholder="Add a task" bind:value={newTask} on:keypress={handleAddTaskInputKeystroke} />
 			<button class="add-task-button" disabled={newTask.replaceAll(" ", "") === ""} on:click={(e) => {addTask(newTask);}}>Add Task</button>
 		</div>
-		{#each incompleteTasks as task}
-			<Task {task} />
+		{#each incompleteTasks as task (task.id)}
+			<Task {task} on:delete={removeTask} />
 		{/each}
 		<div class="tasks-bottom-buttons-container">
 			<button class="remove-all-tasks-button" on:click={removeAllTasks}>Remove All Tasks</button>

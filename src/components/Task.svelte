@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { createEventDispatcher } from 'svelte';
+  const dispatch = createEventDispatcher();
+
 	export let task: Task;
 
 	interface Task {
@@ -8,12 +11,8 @@
 		complete: boolean;
 	}
 
-	function removeTask(): void {
-		console.log('Removing this task...');
-	}
-
 	function handleTaskDeleteClick(e: MouseEvent) {
-		removeTask();
+		dispatch('delete', task.id);
 	}
 </script>
 
