@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Task from './Task.svelte';
+
 	export let name: string = "Someone";
 	export let taskDescriptions: string[] = [];
 	
@@ -78,11 +80,7 @@
 			<button class="add-task-button" disabled={newTask.replaceAll(" ", "") === ""} on:click={(e) => {addTask(newTask);}}>Add Task</button>
 		</div>
 		{#each incompleteTasks as task}
-			<div class="task" data-task-id={task.id}>
-				<input type="checkbox" class="task-complete-checkbox" />
-				<span class="task-text">Task #{task.id}: {task.description}</span>
-				<button class="task-delete" on:click={handleTaskDeleteClick} data-task-id={task.id}>x</button>
-			</div>
+			<Task {task} />
 		{/each}
 		<div class="tasks-bottom-buttons-container">
 			<button class="remove-all-tasks-button" on:click={removeAllTasks}>Remove All Tasks</button>
@@ -116,35 +114,5 @@
 
 	.add-task-button {
 		flex: 1;
-	}
-
-	.task {
-		position: relative;
-		text-align: left;
-		padding: 10px;
-		border-left: 2px solid #f7a58a;
-		border-radius: 3px;
-		background-color: #EEEEEE;
-		margin-bottom: 8px;
-	}
-
-	.task:hover {
-		border-left: 4px solid #FF3E00;
-		padding-left: 8px;
-	}
-
-	.task-delete {
-		position: absolute;
-		top: 4px;
-		right: 4px;
-		border: none;
-		background: none;
-		padding: 0;
-		line-height: 0.5em;
-	}
-
-	.task-delete:hover {
-		cursor: pointer;
-		color: red;
 	}
 </style>
