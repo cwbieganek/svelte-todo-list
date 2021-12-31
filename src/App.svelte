@@ -2,14 +2,6 @@
 	import Todo from './components/ToDo.svelte';
 
 	let name = "Chris";
-	// let tasks: [
-	// 	{id: 1, description: 'Buy milk'},
-	// 	{id: 2, description: 'Schedule dentist appointment'},
-	// 	{id: 3, description: 'Meal prep'},
-	// 	{id: 4, description: 'Walk dog'},
-	// 	{id: 5, description: 'Take over the world'}
-	// ];
-
 	let taskDescriptions: string[] = [
 		'Buy milk',
 		'Schedule dentist appointment',
