@@ -1,8 +1,8 @@
 <script lang="ts">
 	export let name: string = "Someone";
 	export let taskDescriptions: string[] = [];
-	export let tasks: Task[] = [];
-
+	
+	let tasks: Task[] = [];
 	let newTask: string = "";
 
 	// Set initial array of tasks, since passing in Task objects from App was not working.
