@@ -18,7 +18,7 @@
 
 <div class="task">
 	<input type="checkbox" class="task-complete-checkbox" />
-	<span class="task-text">Task #{task.id}: {task.description}</span>
+	<span class="task-text">{task.description}</span>
 	<button class="task-delete" on:click={handleTaskDeleteClick}>x</button>
 </div>
 

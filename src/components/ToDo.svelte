@@ -13,6 +13,7 @@
 
 	let tasks: Task[] = [];
 	let newTask: string = "";
+	$: nextTaskId = (tasks.length == 0) ? 1 : tasks[tasks.length - 1].id + 1;
 
 	// Dynamic variables
 	$: completedTasks = tasks.filter((task) => {
@@ -38,7 +39,7 @@
 		console.log(`Adding a task: ${description}.`);
 
 		let newTask: Task = {
-			id: tasks.length + 1,
+			id: nextTaskId,
 			description: description,
 			priority: 'low',
 			complete: false
