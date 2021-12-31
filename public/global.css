@@ -63,3 +63,15 @@ button:not(:disabled):active {
 button:focus {
 	border-color: #666;
 }
+
+.bg-1 {
+	background-color: #212121;
+}
+
+.bg-2 {
+	background-color: #424242;
+}
+
+.bg-3 {
+	background-color: #848484;
+}
