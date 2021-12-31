@@ -5,11 +5,11 @@ const app = new App({
 	props: {
 		name: 'Chris',
 		tasks: [
-			'Buy milk',
-			'Schedule dentist appointment',
-			'Meal prep',
-			'Walk dog',
-			'Take over the world'
+			{id: 1, description: 'Buy milk'},
+			{id: 2, description: 'Schedule dentist appointment'},
+			{id: 3, description: 'Meal prep'},
+			{id: 4, description: 'Walk dog'},
+			{id: 5, description: 'Take over the world'}
 		]
 	}
 });
