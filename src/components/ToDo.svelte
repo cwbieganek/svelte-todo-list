@@ -2,6 +2,11 @@
 	export let name: string = "Someone";
 	export let taskDescriptions: string[] = [];
 	
+	interface Task {
+		id: number;
+		description: string;
+	}
+
 	let tasks: Task[] = [];
 	let newTask: string = "";
 
@@ -14,11 +19,6 @@
 			description: taskDescription
 		};
 	});
-
-	interface Task {
-		id: number;
-		description: string;
-	}
 
 	function addTask(description: string): void {
 		console.log(`Adding a task: ${description}.`);
