@@ -56,24 +56,33 @@
 			<input class="add-task-input" placeholder="Add a task" bind:value={newTask} on:keypress={handleAddTaskInputKeystroke} />
 			<button class="add-task-button" disabled={newTask.replaceAll(" ", "") === ""} on:click={(e) => {addTask(newTask);}}>Add Task</button>
 		</div>
+		<h3>Incomplete Tasks</h3>
 		{#each incompleteTasks as task (task.id)}
+			<Task bind:task={task} on:delete={removeTask} />
+		{/each}
+		<h3>Completed Tasks</h3>
+		{#each completedTasks as task (task.id)}
 			<Task bind:task={task} on:delete={removeTask} />
 		{/each}
 		<div class="tasks-bottom-buttons-container">
 			<button class="remove-all-tasks-button" on:click={removeAllTasks}>Remove All Tasks</button>
 		</div>
-		{#each completedTasks as task (task.id)}
-			<Task bind:task={task} on:delete={removeTask} />
-		{/each}
 	</div>
 </div>
 
 <style>
-	h2 {
+	h2, h3 {
 		color: #ff3e00;
 		text-transform: uppercase;
-		font-size: 4em;
 		font-weight: 100;
+	}
+
+	h2 {
+		font-size: 3em;
+	}
+
+	h3 {
+		font-size: 2em;
 	}
 
 	.tasks-container {
