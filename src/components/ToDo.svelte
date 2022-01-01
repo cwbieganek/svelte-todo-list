@@ -29,19 +29,6 @@
 		tasks = [...tasks, newTask];
 	}
 
-	function markTaskAsComplete(e: CustomEvent): void {
-		let id: number = e.detail;
-
-		tasks = tasks.map((task) => {
-			if (task.id === id) {
-				// Found the task. Mark it as complete.
-				task.complete = true;
-			}
-
-			return task;
-		});
-	}
-
 	function removeTask(e: CustomEvent): void {
 		let id: number = e.detail;
 		console.log(`Removing task number ${id}.`);

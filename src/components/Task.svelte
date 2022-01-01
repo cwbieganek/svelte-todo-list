@@ -8,12 +8,6 @@
 	function handleTaskDeleteClick(e: MouseEvent) {
 		dispatch('delete', task.id);
 	}
-
-	function handleCheckboxChange(e: Event) {
-		if (task.complete) {
-			dispatch('complete', task.id);
-		}
-	}
 </script>
 
 <div class="task">
