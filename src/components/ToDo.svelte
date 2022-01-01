@@ -5,8 +5,9 @@
 	export let name: string = "Someone";
 	export let tasks: ITask[] = [];
 
-	let newTask: string = "";
+	let newTaskDescription: string = "";
 	$: nextTaskId = (tasks.length == 0) ? 1 : tasks[tasks.length - 1].id + 1;
+	let newTaskPriority: 'low' | 'medium' | 'high' = 'medium';
 
 	// Dynamic variables
 	$: completedTasks = tasks.filter((task) => {
@@ -22,7 +23,7 @@
 		let newTask: ITask = {
 			id: nextTaskId,
 			description: description,
-			priority: 'low',
+			priority: newTaskPriority,
 			complete: false
 		};
 
@@ -44,7 +45,7 @@
 
 	function handleAddTaskInputKeystroke(e: KeyboardEvent): void {
 		if (e.key === "Enter") {
-			addTask(newTask);
+			addTask(newTaskDescription);
 		}
 	}
 </script>
@@ -53,8 +54,16 @@
 	<h2>{name}'s To Do List</h2>
 	<div class="tasks-container">
 		<div class="add-task-container">
-			<input class="add-task-input" placeholder="Add a task" bind:value={newTask} on:keypress={handleAddTaskInputKeystroke} />
-			<button class="add-task-button" disabled={newTask.replaceAll(" ", "") === ""} on:click={(e) => {addTask(newTask);}}>Add Task</button>
+			<input class="add-task-input" placeholder="Enter a task description" bind:value={newTaskDescription} on:keypress={handleAddTaskInputKeystroke} />
+			<button class="add-task-button" disabled={newTaskDescription.replaceAll(" ", "") === ""} on:click={(e) => {addTask(newTaskDescription);}}>Add Task</button>
+		</div>
+		<div style="display: flex; flex-direction: row;">
+			<label for="priority" style="font-weight: bold;">Priority:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+			<select bind:value={newTaskPriority}>
+				<option value="low">Low</option>
+				<option value="medium" selected>Medium</option>
+				<option value="high">High</option>
+			</select>
 		</div>
 		<h3>Incomplete Tasks</h3>
 		{#each incompleteTasks as task (task.id)}
