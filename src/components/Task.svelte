@@ -10,7 +10,7 @@
 	}
 </script>
 
-<div class="task">
+<div class="task" class:task-incomplete="{!task.complete}" class:task-complete="{task.complete}">
 	<input type="checkbox" class="task-complete-checkbox" bind:checked={task.complete} />
 	<span class="task-text">{task.description} {task.complete ? '(complete)' : ''}</span>
 	<button class="task-delete" on:click={handleTaskDeleteClick}>x</button>
@@ -21,14 +21,26 @@
 		position: relative;
 		text-align: left;
 		padding: 10px;
-		border-left: 2px solid #f7a58a;
 		border-radius: 3px;
 		background-color: #EEEEEE;
 		margin-bottom: 8px;
 	}
 
-	.task:hover {
+	.task-incomplete {
+		border-left: 2px solid #f7a58a;
+	}
+
+	.task-incomplete:hover {
 		border-left: 4px solid #FF3E00;
+		padding-left: 8px;
+	}
+
+	.task-complete {
+		border-left: 2px solid green;
+	}
+
+	.task-complete:hover {
+		border-left: 4px solid green;
 		padding-left: 8px;
 	}
 
