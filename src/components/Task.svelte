@@ -5,23 +5,20 @@
 
 	export let task: ITask;
 
-	let complete: boolean; // True if input is checked
-	task.complete = complete; // Match the value of complete
-
 	function handleTaskDeleteClick(e: MouseEvent) {
 		dispatch('delete', task.id);
 	}
 
 	function handleCheckboxChange(e: Event) {
-		if (complete) {
+		if (task.complete) {
 			dispatch('complete', task.id);
 		}
 	}
 </script>
 
 <div class="task">
-	<input type="checkbox" class="task-complete-checkbox" bind:checked={complete} on:change={handleCheckboxChange} />
-	<span class="task-text">{task.description} {complete ? '(complete)' : ''}</span>
+	<input type="checkbox" class="task-complete-checkbox" bind:checked={task.complete} />
+	<span class="task-text">{task.description} {task.complete ? '(complete)' : ''}</span>
 	<button class="task-delete" on:click={handleTaskDeleteClick}>x</button>
 </div>
 

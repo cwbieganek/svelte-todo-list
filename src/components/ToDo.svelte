@@ -70,13 +70,13 @@
 			<button class="add-task-button" disabled={newTask.replaceAll(" ", "") === ""} on:click={(e) => {addTask(newTask);}}>Add Task</button>
 		</div>
 		{#each incompleteTasks as task (task.id)}
-			<Task {task} on:delete={removeTask} on:complete={markTaskAsComplete} />
+			<Task bind:task={task} on:delete={removeTask} />
 		{/each}
 		<div class="tasks-bottom-buttons-container">
 			<button class="remove-all-tasks-button" on:click={removeAllTasks}>Remove All Tasks</button>
 		</div>
 		{#each completedTasks as task (task.id)}
-			<Task {task} on:delete={removeTask} />
+			<Task bind:task={task} on:delete={removeTask} />
 		{/each}
 	</div>
 </div>
