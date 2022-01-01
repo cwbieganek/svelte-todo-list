@@ -75,6 +75,9 @@
 		<div class="tasks-bottom-buttons-container">
 			<button class="remove-all-tasks-button" on:click={removeAllTasks}>Remove All Tasks</button>
 		</div>
+		{#each completedTasks as task (task.id)}
+			<Task {task} on:delete={removeTask} />
+		{/each}
 	</div>
 </div>
 
