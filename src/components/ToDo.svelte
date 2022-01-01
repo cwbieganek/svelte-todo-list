@@ -76,10 +76,16 @@
 		</div>
 		<button class="add-task-button" disabled={newTaskDescription.replaceAll(" ", "") === ""} on:click={(e) => {addTask(newTaskDescription);}}>Add Task</button>
 		<h3>Incomplete Tasks</h3>
+		{#if incompleteTasks.length === 0}
+			<div class="pt-12 pb-12">No incomplete tasks.</div>
+		{/if}
 		{#each incompleteTasks as task (task.id)}
 			<Task bind:task={task} on:delete={removeTask} />
 		{/each}
 		<h3>Completed Tasks</h3>
+		{#if completedTasks.length === 0}
+			<div class="pt-12 pb-12">No tasks completed.</div>
+		{/if}
 		{#each completedTasks as task (task.id)}
 			<Task bind:task={task} on:delete={removeTask} />
 		{/each}
