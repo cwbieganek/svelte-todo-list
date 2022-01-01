@@ -53,11 +53,10 @@
 <div>
 	<h2>{name}'s To Do List</h2>
 	<div class="tasks-container">
-		<div class="add-task-container">
+		<div class="add-task-container-row">
 			<input class="add-task-input" placeholder="Enter a task description" bind:value={newTaskDescription} on:keypress={handleAddTaskInputKeystroke} />
-			<button class="add-task-button" disabled={newTaskDescription.replaceAll(" ", "") === ""} on:click={(e) => {addTask(newTaskDescription);}}>Add Task</button>
 		</div>
-		<div style="display: flex; flex-direction: row;">
+		<div class="add-task-container-row">
 			<label for="priority" style="font-weight: bold;">Priority:&nbsp;&nbsp;&nbsp;&nbsp;</label>
 			<select bind:value={newTaskPriority}>
 				<option value="low">Low</option>
@@ -65,6 +64,7 @@
 				<option value="high">High</option>
 			</select>
 		</div>
+		<button class="add-task-button" disabled={newTaskDescription.replaceAll(" ", "") === ""} on:click={(e) => {addTask(newTaskDescription);}}>Add Task</button>
 		<h3>Incomplete Tasks</h3>
 		{#each incompleteTasks as task (task.id)}
 			<Task bind:task={task} on:delete={removeTask} />
@@ -99,13 +99,15 @@
 		margin: 0 auto;
 	}
 
-	.add-task-container {
+	.add-task-container-row {
 		width: 100%;
 		display: flex;
 		flex-direction: row;
+		align-items: center;
+		margin-bottom: 10px;
 	}
 
-	.add-task-container input {
+	.add-task-container-row input {
 		width: 70%;
 		margin-right: 3em;
 	}
