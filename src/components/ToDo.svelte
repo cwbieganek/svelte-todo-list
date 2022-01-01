@@ -5,8 +5,10 @@
 	export let name: string = "Someone";
 	export let tasks: ITask[] = [];
 
-	let newTask: string = "";
+	let newTaskDescription: string = "";
 	$: nextTaskId = (tasks.length == 0) ? 1 : tasks[tasks.length - 1].id + 1;
+	let newTaskPriority: 'low' | 'medium' | 'high' = 'medium';
+	let newTaskCategory: string;
 
 	// Dynamic variables
 	$: completedTasks = tasks.filter((task) => {
@@ -22,7 +24,8 @@
 		let newTask: ITask = {
 			id: nextTaskId,
 			description: description,
-			priority: 'low',
+			priority: newTaskPriority,
+			category: newTaskCategory,
 			complete: false
 		};
 
@@ -44,7 +47,7 @@
 
 	function handleAddTaskInputKeystroke(e: KeyboardEvent): void {
 		if (e.key === "Enter") {
-			addTask(newTask);
+			addTask(newTaskDescription);
 		}
 	}
 </script>
@@ -52,10 +55,26 @@
 <div>
 	<h2>{name}'s To Do List</h2>
 	<div class="tasks-container">
-		<div class="add-task-container">
-			<input class="add-task-input" placeholder="Add a task" bind:value={newTask} on:keypress={handleAddTaskInputKeystroke} />
-			<button class="add-task-button" disabled={newTask.replaceAll(" ", "") === ""} on:click={(e) => {addTask(newTask);}}>Add Task</button>
+		<div class="add-task-container-row">
+			<input class="add-task-input" placeholder="Enter a task description" bind:value={newTaskDescription} on:keypress={handleAddTaskInputKeystroke} />
 		</div>
+		<div class="add-task-container-row">
+			<label for="priority" style="font-weight: bold;">Priority:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+			<select bind:value={newTaskPriority}>
+				<option value="low">Low</option>
+				<option value="medium" selected>Medium</option>
+				<option value="high">High</option>
+			</select>
+		</div>
+		<div class="add-task-container-row">
+			<label for="category" style="font-weight: bold;">Category:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+			<select bind:value={newTaskCategory}>
+				<option value="personal" selected>Personal</option>
+				<option value="work">Work</option>
+				<option value="other">Other</option>
+			</select>
+		</div>
+		<button class="add-task-button" disabled={newTaskDescription.replaceAll(" ", "") === ""} on:click={(e) => {addTask(newTaskDescription);}}>Add Task</button>
 		<h3>Incomplete Tasks</h3>
 		{#each incompleteTasks as task (task.id)}
 			<Task bind:task={task} on:delete={removeTask} />
@@ -90,15 +109,22 @@
 		margin: 0 auto;
 	}
 
-	.add-task-container {
+	.add-task-container-row {
 		width: 100%;
 		display: flex;
 		flex-direction: row;
+		align-items: center;
+		margin-bottom: 10px;
 	}
 
-	.add-task-container input {
+	.add-task-container-row input {
 		width: 70%;
 		margin-right: 3em;
+	}
+
+	.add-task-container-row label {
+		width: 6em;
+		text-align: left;
 	}
 
 	.add-task-button {
