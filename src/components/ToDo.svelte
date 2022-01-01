@@ -3,9 +3,8 @@
 	import type ITask from './ITask';
 
 	export let name: string = "Someone";
-	export let taskDescriptions: string[] = [];
-
-	let tasks: ITask[] = [];
+	export let tasks: ITask[] = [];
+	
 	let newTask: string = "";
 	$: nextTaskId = (tasks.length == 0) ? 1 : tasks[tasks.length - 1].id + 1;
 
@@ -15,18 +14,6 @@
 	});
 	$: incompleteTasks = tasks.filter((task) => {
 		return !task.complete;
-	});
-
-	// Set initial array of tasks, since passing in Task objects from App was not working.
-	// It's possible this was because the App component was not aware of the Task interface,
-	// even though the objects were properly implementing the Task interface. ¯\_(ツ)_/¯
-	tasks = taskDescriptions.map((taskDescription, i) => {
-		return {
-			id: i + 1,
-			description: taskDescription,
-			priority: 'low',
-			complete: false
-		};
 	});
 
 	function addTask(description: string): void {

@@ -1,18 +1,44 @@
 <script lang="ts">
 	import Todo from './components/ToDo.svelte';
+	import type ITask from './components/ITask';
 
 	let name = "Chris";
-	let taskDescriptions: string[] = [
-		'Buy milk',
-		'Schedule dentist appointment',
-		'Meal prep',
-		'Walk dog',
-		'Take over the world'
+	let tasks: ITask[] = [
+		{
+			id: 1,
+			description: 'Buy milk',
+			priority: 'medium',
+			complete: false
+		},
+		{
+			id: 2,
+			description: 'Schedule dentist appointment',
+			priority: 'low',
+			complete: false
+		},
+		{
+			id: 3,
+			description: 'Meal prep',
+			priority: 'high',
+			complete: false
+		},
+		{
+			id: 4,
+			description: 'Walk dog',
+			priority: 'medium',
+			complete: false
+		},
+		{
+			id: 5,
+			description: 'Take over the world',
+			priority: 'high',
+			complete: false
+		}
 	];
 </script>
 
 <main>
-	<Todo {name} {taskDescriptions} />
+	<Todo {name} {tasks} />
 </main>
 
 <style>
