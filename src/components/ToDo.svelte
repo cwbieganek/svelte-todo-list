@@ -4,7 +4,7 @@
 
 	export let name: string = "Someone";
 	export let tasks: ITask[] = [];
-	
+
 	let newTask: string = "";
 	$: nextTaskId = (tasks.length == 0) ? 1 : tasks[tasks.length - 1].id + 1;
 
@@ -27,6 +27,19 @@
 		};
 
 		tasks = [...tasks, newTask];
+	}
+
+	function markTaskAsComplete(e: CustomEvent): void {
+		let id: number = e.detail;
+
+		tasks = tasks.map((task) => {
+			if (task.id === id) {
+				// Found the task. Mark it as complete.
+				task.complete = true;
+			}
+
+			return task;
+		});
 	}
 
 	function removeTask(e: CustomEvent): void {
@@ -57,13 +70,13 @@
 			<button class="add-task-button" disabled={newTask.replaceAll(" ", "") === ""} on:click={(e) => {addTask(newTask);}}>Add Task</button>
 		</div>
 		{#each incompleteTasks as task (task.id)}
-			<Task {task} on:delete={removeTask} />
+			<Task bind:task={task} on:delete={removeTask} />
 		{/each}
 		<div class="tasks-bottom-buttons-container">
 			<button class="remove-all-tasks-button" on:click={removeAllTasks}>Remove All Tasks</button>
 		</div>
 		{#each completedTasks as task (task.id)}
-			<Task {task} on:delete={removeTask} />
+			<Task bind:task={task} on:delete={removeTask} />
 		{/each}
 	</div>
 </div>
