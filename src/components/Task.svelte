@@ -11,6 +11,7 @@
 </script>
 
 <div class="task" class:task-incomplete="{!task.complete}" class:task-complete="{task.complete}">
+	<div class="priority circle">{task.priority[0].toUpperCase()}</div>
 	<input type="checkbox" class="task-complete-checkbox" bind:checked={task.complete} />
 	<span class="task-text">{task.description} {task.complete ? '(complete)' : ''}</span>
 	<button class="task-delete" on:click={handleTaskDeleteClick}>x</button>
@@ -57,5 +58,22 @@
 	.task-delete:hover {
 		cursor: pointer;
 		color: red;
+	}
+
+	.circle {
+		width: 12px;
+		height: 12px;
+		background: red;
+		-moz-border-radius: 6px;
+		-webkit-border-radius: 6px;
+		border-radius: 6px;
+	}
+
+	.priority {
+		position: absolute;
+		top: -6px;
+		left: -6px;
+		font-size: 0.5em;
+		text-align: center;
 	}
 </style>
