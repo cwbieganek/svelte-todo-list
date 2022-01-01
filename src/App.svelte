@@ -8,30 +8,35 @@
 			id: 1,
 			description: 'Buy milk',
 			priority: 'medium',
+			category: 'personal',
 			complete: false
 		},
 		{
 			id: 2,
 			description: 'Schedule dentist appointment',
 			priority: 'low',
+			category: 'personal',
 			complete: false
 		},
 		{
 			id: 3,
-			description: 'Meal prep',
+			description: 'Work project',
 			priority: 'high',
+			category: 'work',
 			complete: false
 		},
 		{
 			id: 4,
 			description: 'Walk dog',
 			priority: 'medium',
+			category: 'personal',
 			complete: false
 		},
 		{
 			id: 5,
 			description: 'Take over the world',
 			priority: 'high',
+			category: 'personal',
 			complete: false
 		}
 	];

@@ -8,6 +8,7 @@
 	let newTaskDescription: string = "";
 	$: nextTaskId = (tasks.length == 0) ? 1 : tasks[tasks.length - 1].id + 1;
 	let newTaskPriority: 'low' | 'medium' | 'high' = 'medium';
+	let newTaskCategory: string;
 
 	// Dynamic variables
 	$: completedTasks = tasks.filter((task) => {
@@ -24,6 +25,7 @@
 			id: nextTaskId,
 			description: description,
 			priority: newTaskPriority,
+			category: newTaskCategory,
 			complete: false
 		};
 
@@ -62,6 +64,14 @@
 				<option value="low">Low</option>
 				<option value="medium" selected>Medium</option>
 				<option value="high">High</option>
+			</select>
+		</div>
+		<div class="add-task-container-row">
+			<label for="category" style="font-weight: bold;">Category:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+			<select bind:value={newTaskCategory}>
+				<option value="personal" selected>Personal</option>
+				<option value="work">Work</option>
+				<option value="other">Other</option>
 			</select>
 		</div>
 		<button class="add-task-button" disabled={newTaskDescription.replaceAll(" ", "") === ""} on:click={(e) => {addTask(newTaskDescription);}}>Add Task</button>
@@ -110,6 +120,11 @@
 	.add-task-container-row input {
 		width: 70%;
 		margin-right: 3em;
+	}
+
+	.add-task-container-row label {
+		width: 6em;
+		text-align: left;
 	}
 
 	.add-task-button {
