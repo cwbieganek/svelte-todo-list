@@ -1,17 +1,10 @@
 <script lang="ts">
 	import Task from './Task.svelte';
+	import TaskList from './TaskList.svelte';
+	import type ITask from './ITask';
 
 	export let name: string = "Someone";
-	export let taskDescriptions: string[] = [];
-	
-	interface Task {
-		id: number;
-		description: string;
-		priority: 'low' | 'medium' | 'high';
-		complete: boolean;
-	}
-
-	let tasks: Task[] = [];
+	export let tasks: ITask[] = [];
 	let newTask: string = "";
 	$: nextTaskId = (tasks.length == 0) ? 1 : tasks[tasks.length - 1].id + 1;
 
@@ -23,22 +16,10 @@
 		return !task.complete;
 	});
 
-	// Set initial array of tasks, since passing in Task objects from App was not working.
-	// It's possible this was because the App component was not aware of the Task interface,
-	// even though the objects were properly implementing the Task interface. ¯\_(ツ)_/¯
-	tasks = taskDescriptions.map((taskDescription, i) => {
-		return {
-			id: i + 1,
-			description: taskDescription,
-			priority: 'low',
-			complete: false
-		};
-	});
-
 	function addTask(description: string): void {
 		console.log(`Adding a task: ${description}.`);
 
-		let newTask: Task = {
+		let newTask: ITask = {
 			id: nextTaskId,
 			description: description,
 			priority: 'low',
@@ -75,12 +56,11 @@
 			<input class="add-task-input" placeholder="Add a task" bind:value={newTask} on:keypress={handleAddTaskInputKeystroke} />
 			<button class="add-task-button" disabled={newTask.replaceAll(" ", "") === ""} on:click={(e) => {addTask(newTask);}}>Add Task</button>
 		</div>
-		{#each incompleteTasks as task (task.id)}
-			<Task {task} on:delete={removeTask} />
-		{/each}
+		<TaskList tasks={incompleteTasks} />
 		<div class="tasks-bottom-buttons-container">
 			<button class="remove-all-tasks-button" on:click={removeAllTasks}>Remove All Tasks</button>
 		</div>
+		<TaskList tasks={completedTasks} />
 	</div>
 </div>
 
