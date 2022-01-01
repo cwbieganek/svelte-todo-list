@@ -12,8 +12,11 @@
 
 <div class="task" class:task-incomplete="{!task.complete}" class:task-complete="{task.complete}">
 	<div class="priority circle">{task.priority[0].toUpperCase()}</div>
-	<input type="checkbox" class="task-complete-checkbox" bind:checked={task.complete} />
-	<span class="task-text">{task.description} {task.complete ? '(complete)' : ''}</span>
+	<div class="flex flex-row items-center">
+		<div class="w-6"><input type="checkbox" class="task-complete-checkbox" bind:checked={task.complete} /></div>
+		<div class="flex-1"><span class="task-text">{task.description} {task.complete ? '(complete)' : ''}</span></div>
+		<div class="w-48 last-column"><span class="category-text text-sm"><strong>Category:</strong> {task.category}</span></div>
+	</div>
 	<button class="task-delete" on:click={handleTaskDeleteClick}>x</button>
 </div>
 
@@ -60,6 +63,10 @@
 		color: red;
 	}
 
+	.last-column {
+		padding-right: 1em;
+	}
+
 	.circle {
 		width: 12px;
 		height: 12px;
@@ -75,5 +82,14 @@
 		left: -6px;
 		font-size: 0.5em;
 		text-align: center;
+	}
+
+	/* Utility classes */
+	.center-text {
+		text-align: center;
+	}
+
+	.right-text {
+		text-align: right;
 	}
 </style>
