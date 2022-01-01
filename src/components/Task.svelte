@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type Task from './TaskInterface';
   import { createEventDispatcher } from 'svelte';
   const dispatch = createEventDispatcher();
 
@@ -6,13 +7,6 @@
 
 	let complete: boolean; // True if input is checked
 	task.complete = complete; // Match the value of complete
-
-	interface Task {
-		id: number;
-		description: string;
-		priority: 'low' | 'medium' | 'high';
-		complete: boolean;
-	}
 
 	function handleTaskDeleteClick(e: MouseEvent) {
 		dispatch('delete', task.id);
