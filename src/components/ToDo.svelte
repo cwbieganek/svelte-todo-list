@@ -1,17 +1,11 @@
 <script lang="ts">
 	import Task from './Task.svelte';
+	import type ITask from './ITask';
 
 	export let name: string = "Someone";
 	export let taskDescriptions: string[] = [];
-	
-	interface Task {
-		id: number;
-		description: string;
-		priority: 'low' | 'medium' | 'high';
-		complete: boolean;
-	}
 
-	let tasks: Task[] = [];
+	let tasks: ITask[] = [];
 	let newTask: string = "";
 	$: nextTaskId = (tasks.length == 0) ? 1 : tasks[tasks.length - 1].id + 1;
 
@@ -38,7 +32,7 @@
 	function addTask(description: string): void {
 		console.log(`Adding a task: ${description}.`);
 
-		let newTask: Task = {
+		let newTask: ITask = {
 			id: nextTaskId,
 			description: description,
 			priority: 'low',
