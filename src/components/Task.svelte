@@ -1,9 +1,9 @@
 <script lang="ts">
-	import type ITask from './ITask';
+	import type Task from './TaskInterface';
   import { createEventDispatcher } from 'svelte';
   const dispatch = createEventDispatcher();
 
-	export let task: ITask;
+	export let task: Task;
 
 	let complete: boolean; // True if input is checked
 	task.complete = complete; // Match the value of complete
