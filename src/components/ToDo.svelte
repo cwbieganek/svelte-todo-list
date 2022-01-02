@@ -13,10 +13,14 @@
 	// Dynamic variables
 	$: completedTasks = tasks.filter((task) => {
 		return task.complete;
+	}).sort((a, b) => {
+		return priorityToNumber(b.priority) - priorityToNumber(a.priority);
 	});
 	$: incompleteTasks = tasks.filter((task) => {
 		return !task.complete;
-	});
+	}).sort((a, b) => {
+		return priorityToNumber(b.priority) - priorityToNumber(a.priority);
+	});;
 
 	function addTask(description: string): void {
 		console.log(`Adding a task: ${description}.`);
@@ -48,6 +52,19 @@
 	function handleAddTaskInputKeystroke(e: KeyboardEvent): void {
 		if (e.key === "Enter") {
 			addTask(newTaskDescription);
+		}
+	}
+
+	function priorityToNumber(priority: string) {
+		switch (priority) {
+			case 'low':
+				return 1;
+			case 'medium':
+				return 2;
+			case 'high':
+				return 3;
+			
+			throw new Error(`Invalid priority: ${priority}.`);
 		}
 	}
 </script>
