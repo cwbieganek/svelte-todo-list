@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Task from './Task.svelte';
 	import type ITask from './ITask';
 	import Category from './Category.svelte';
 
