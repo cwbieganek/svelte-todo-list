@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Task from './Task.svelte';
 	import type ITask from './ITask';
+	import Category from './Category.svelte';
 
 	export let name: string = "Someone";
 	export let tasks: ITask[] = [];
@@ -9,18 +10,6 @@
 	$: nextTaskId = (tasks.length == 0) ? 1 : tasks[tasks.length - 1].id + 1;
 	let newTaskPriority: 'low' | 'medium' | 'high' = 'medium';
 	let newTaskCategory: string;
-
-	// Dynamic variables
-	$: completedTasks = tasks.filter((task) => {
-		return task.complete;
-	}).sort((a, b) => {
-		return priorityToNumber(b.priority) - priorityToNumber(a.priority);
-	});
-	$: incompleteTasks = tasks.filter((task) => {
-		return !task.complete;
-	}).sort((a, b) => {
-		return priorityToNumber(b.priority) - priorityToNumber(a.priority);
-	});;
 
 	function addTask(description: string): void {
 		console.log(`Adding a task: ${description}.`);
@@ -36,14 +25,6 @@
 		tasks = [...tasks, newTask];
 	}
 
-	function removeTask(e: CustomEvent): void {
-		let id: number = e.detail;
-		console.log(`Removing task number ${id}.`);
-		tasks = tasks.filter((task) => {
-			return task.id !== id;
-		});
-	}
-
 	function removeAllTasks(): void {
 		console.log(`Removing all ${tasks.length} tasks.`);
 		tasks = [];
@@ -52,19 +33,6 @@
 	function handleAddTaskInputKeystroke(e: KeyboardEvent): void {
 		if (e.key === "Enter") {
 			addTask(newTaskDescription);
-		}
-	}
-
-	function priorityToNumber(priority: string) {
-		switch (priority) {
-			case 'low':
-				return 1;
-			case 'medium':
-				return 2;
-			case 'high':
-				return 3;
-			
-			throw new Error(`Invalid priority: ${priority}.`);
 		}
 	}
 </script>
@@ -92,20 +60,7 @@
 			</select>
 		</div>
 		<button class="add-task-button" disabled={newTaskDescription.replaceAll(" ", "") === ""} on:click={(e) => {addTask(newTaskDescription);}}>Add Task</button>
-		<h3>Incomplete Tasks</h3>
-		{#if incompleteTasks.length === 0}
-			<div class="pt-12 pb-12">No incomplete tasks.</div>
-		{/if}
-		{#each incompleteTasks as task (task.id)}
-			<Task bind:task={task} on:delete={removeTask} />
-		{/each}
-		<h3>Completed Tasks</h3>
-		{#if completedTasks.length === 0}
-			<div class="pt-12 pb-12">No tasks completed.</div>
-		{/if}
-		{#each completedTasks as task (task.id)}
-			<Task bind:task={task} on:delete={removeTask} />
-		{/each}
+		<Category bind:tasks={tasks} categoryName={'Default Category'} />
 		<div class="tasks-bottom-buttons-container">
 			<button class="remove-all-tasks-button" on:click={removeAllTasks}>Remove All Tasks</button>
 		</div>
@@ -113,18 +68,11 @@
 </div>
 
 <style>
-	h2, h3 {
+	h2 {
 		color: #ff3e00;
 		text-transform: uppercase;
 		font-weight: 100;
-	}
-
-	h2 {
 		font-size: 3em;
-	}
-
-	h3 {
-		font-size: 2em;
 	}
 
 	.tasks-container {
