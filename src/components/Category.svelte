@@ -39,24 +39,38 @@
 	}
 </script>
 
-<h2>{categoryName}</h2>
-<h3>Incomplete Tasks</h3>
-{#if incompleteTasks.length === 0}
-	<div class="pt-12 pb-12">No incomplete tasks.</div>
-{/if}
-{#each incompleteTasks as task (task.id)}
-	<Task bind:task={task} on:delete={removeTask} />
-{/each}
-<h3>Completed Tasks</h3>
-{#if completedTasks.length === 0}
-	<div class="pt-12 pb-12">No tasks completed.</div>
-{/if}
-{#each completedTasks as task (task.id)}
-	<Task bind:task={task} on:delete={removeTask} />
-{/each}
+<div class="category">
+	<h2>{categoryName}</h2>
+	<h3>Incomplete Tasks</h3>
+	{#if incompleteTasks.length === 0}
+		<div class="pt-12 pb-12">No incomplete tasks.</div>
+	{/if}
+	{#each incompleteTasks as task (task.id)}
+		<Task bind:task={task} on:delete={removeTask} />
+	{/each}
+	<h3>Completed Tasks</h3>
+	{#if completedTasks.length === 0}
+		<div class="pt-12 pb-12">No tasks completed.</div>
+	{/if}
+	{#each completedTasks as task (task.id)}
+		<Task bind:task={task} on:delete={removeTask} />
+	{/each}
+</div>
 
 <style>
-		h2, h3 {
+	.category {
+		display: flex;
+		flex-direction: column;
+		padding: 12px;
+		border-right: 1px solid gray;
+		min-width: 800px;
+	}
+
+	.category:first-of-type {
+		border-left: 1px solid gray;
+	}
+
+	h2, h3 {
 		color: #ff3e00;
 		text-transform: uppercase;
 		font-weight: 100;

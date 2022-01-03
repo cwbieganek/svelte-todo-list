@@ -10,6 +10,18 @@
 	let newTaskPriority: 'low' | 'medium' | 'high' = 'medium';
 	let newTaskCategory: string;
 
+	$: personalTasks = tasks.filter((task) => {
+		return task.category === 'personal';
+	});
+
+	$: workTasks = tasks.filter((task) => {
+		return task.category === 'work';
+	});
+
+	$: otherTasks = tasks.filter((task) => {
+		return task.category === 'other';
+	});
+
 	function addTask(description: string): void {
 		console.log(`Adding a task: ${description}.`);
 
@@ -59,7 +71,12 @@
 			</select>
 		</div>
 		<button class="add-task-button" disabled={newTaskDescription.replaceAll(" ", "") === ""} on:click={(e) => {addTask(newTaskDescription);}}>Add Task</button>
-		<Category bind:tasks={tasks} categoryName={'Default Category'} />
+		<div class="categories-container">
+			<!-- TODO: Use #each instead -->
+			<Category bind:tasks={personalTasks} categoryName={'Personal Tasks'} />
+			<Category bind:tasks={workTasks} categoryName={'Work Tasks'} />
+			<Category bind:tasks={otherTasks} categoryName={'Other Tasks'} />
+		</div>
 		<div class="tasks-bottom-buttons-container">
 			<button class="remove-all-tasks-button" on:click={removeAllTasks}>Remove All Tasks</button>
 		</div>
@@ -75,7 +92,8 @@
 	}
 
 	.tasks-container {
-		width: 50%;
+		/* width: 50%; */
+		width: 100%;
 		margin: 0 auto;
 	}
 
@@ -99,5 +117,11 @@
 
 	.add-task-button {
 		flex: 1;
+	}
+
+	.categories-container {
+		display: flex;
+		flex-direction: row;
+		overflow-x: scroll;
 	}
 </style>
