@@ -51,26 +51,28 @@
 <div>
 	<h2>{name}'s To Do List</h2>
 	<div class="tasks-container">
-		<div class="add-task-container-row">
-			<input class="add-task-input" placeholder="Enter a task description" bind:value={newTaskDescription} on:keypress={handleAddTaskInputKeystroke} />
+		<div class="add-task-form">
+			<div class="add-task-container-row">
+				<input class="add-task-input" placeholder="Enter a task description" bind:value={newTaskDescription} on:keypress={handleAddTaskInputKeystroke} />
+			</div>
+			<div class="add-task-container-row">
+				<label for="priority" style="font-weight: bold;">Priority:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+				<select bind:value={newTaskPriority}>
+					<option value="low">Low</option>
+					<option value="medium" selected>Medium</option>
+					<option value="high">High</option>
+				</select>
+			</div>
+			<div class="add-task-container-row">
+				<label for="category" style="font-weight: bold;">Category:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+				<select bind:value={newTaskCategory}>
+					<option value="personal" selected>Personal</option>
+					<option value="work">Work</option>
+					<option value="other">Other</option>
+				</select>
+			</div>
+			<button class="add-task-button" disabled={newTaskDescription.replaceAll(" ", "") === ""} on:click={(e) => {addTask(newTaskDescription);}}>Add Task</button>
 		</div>
-		<div class="add-task-container-row">
-			<label for="priority" style="font-weight: bold;">Priority:&nbsp;&nbsp;&nbsp;&nbsp;</label>
-			<select bind:value={newTaskPriority}>
-				<option value="low">Low</option>
-				<option value="medium" selected>Medium</option>
-				<option value="high">High</option>
-			</select>
-		</div>
-		<div class="add-task-container-row">
-			<label for="category" style="font-weight: bold;">Category:&nbsp;&nbsp;&nbsp;&nbsp;</label>
-			<select bind:value={newTaskCategory}>
-				<option value="personal" selected>Personal</option>
-				<option value="work">Work</option>
-				<option value="other">Other</option>
-			</select>
-		</div>
-		<button class="add-task-button" disabled={newTaskDescription.replaceAll(" ", "") === ""} on:click={(e) => {addTask(newTaskDescription);}}>Add Task</button>
 		<div class="categories-container">
 			<!-- TODO: Use #each instead -->
 			<Category bind:tasks={personalTasks} categoryName={'Personal Tasks'} />
@@ -95,6 +97,11 @@
 		/* width: 50%; */
 		width: 100%;
 		margin: 0 auto;
+	}
+
+	.add-task-form {
+		width: 50%;
+		margin: auto;
 	}
 
 	.add-task-container-row {
