@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Task from './Task.svelte';
 	import type ITask from './ITask';
+	import Category from './Category.svelte';
 
 	export let name: string = "Someone";
 	export let tasks: ITask[] = [];
@@ -10,17 +10,17 @@
 	let newTaskPriority: 'low' | 'medium' | 'high' = 'medium';
 	let newTaskCategory: string;
 
-	// Dynamic variables
-	$: completedTasks = tasks.filter((task) => {
-		return task.complete;
-	}).sort((a, b) => {
-		return priorityToNumber(b.priority) - priorityToNumber(a.priority);
+	$: personalTasks = tasks.filter((task) => {
+		return task.category === 'personal';
 	});
-	$: incompleteTasks = tasks.filter((task) => {
-		return !task.complete;
-	}).sort((a, b) => {
-		return priorityToNumber(b.priority) - priorityToNumber(a.priority);
-	});;
+
+	$: workTasks = tasks.filter((task) => {
+		return task.category === 'work';
+	});
+
+	$: otherTasks = tasks.filter((task) => {
+		return task.category === 'other';
+	});
 
 	function addTask(description: string): void {
 		console.log(`Adding a task: ${description}.`);
@@ -36,14 +36,6 @@
 		tasks = [...tasks, newTask];
 	}
 
-	function removeTask(e: CustomEvent): void {
-		let id: number = e.detail;
-		console.log(`Removing task number ${id}.`);
-		tasks = tasks.filter((task) => {
-			return task.id !== id;
-		});
-	}
-
 	function removeAllTasks(): void {
 		console.log(`Removing all ${tasks.length} tasks.`);
 		tasks = [];
@@ -54,58 +46,39 @@
 			addTask(newTaskDescription);
 		}
 	}
-
-	function priorityToNumber(priority: string) {
-		switch (priority) {
-			case 'low':
-				return 1;
-			case 'medium':
-				return 2;
-			case 'high':
-				return 3;
-			
-			throw new Error(`Invalid priority: ${priority}.`);
-		}
-	}
 </script>
 
 <div>
 	<h2>{name}'s To Do List</h2>
 	<div class="tasks-container">
-		<div class="add-task-container-row">
-			<input class="add-task-input" placeholder="Enter a task description" bind:value={newTaskDescription} on:keypress={handleAddTaskInputKeystroke} />
+		<div class="add-task-form">
+			<div class="add-task-container-row">
+				<input class="add-task-input" placeholder="Enter a task description" bind:value={newTaskDescription} on:keypress={handleAddTaskInputKeystroke} />
+			</div>
+			<div class="add-task-container-row">
+				<label for="priority" style="font-weight: bold;">Priority:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+				<select bind:value={newTaskPriority}>
+					<option value="low">Low</option>
+					<option value="medium" selected>Medium</option>
+					<option value="high">High</option>
+				</select>
+			</div>
+			<div class="add-task-container-row">
+				<label for="category" style="font-weight: bold;">Category:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+				<select bind:value={newTaskCategory}>
+					<option value="personal" selected>Personal</option>
+					<option value="work">Work</option>
+					<option value="other">Other</option>
+				</select>
+			</div>
+			<button class="add-task-button" disabled={newTaskDescription.replaceAll(" ", "") === ""} on:click={(e) => {addTask(newTaskDescription);}}>Add Task</button>
 		</div>
-		<div class="add-task-container-row">
-			<label for="priority" style="font-weight: bold;">Priority:&nbsp;&nbsp;&nbsp;&nbsp;</label>
-			<select bind:value={newTaskPriority}>
-				<option value="low">Low</option>
-				<option value="medium" selected>Medium</option>
-				<option value="high">High</option>
-			</select>
+		<div class="categories-container">
+			<!-- TODO: Use #each instead -->
+			<Category bind:tasks={personalTasks} categoryName={'Personal Tasks'} />
+			<Category bind:tasks={workTasks} categoryName={'Work Tasks'} />
+			<Category bind:tasks={otherTasks} categoryName={'Other Tasks'} />
 		</div>
-		<div class="add-task-container-row">
-			<label for="category" style="font-weight: bold;">Category:&nbsp;&nbsp;&nbsp;&nbsp;</label>
-			<select bind:value={newTaskCategory}>
-				<option value="personal" selected>Personal</option>
-				<option value="work">Work</option>
-				<option value="other">Other</option>
-			</select>
-		</div>
-		<button class="add-task-button" disabled={newTaskDescription.replaceAll(" ", "") === ""} on:click={(e) => {addTask(newTaskDescription);}}>Add Task</button>
-		<h3>Incomplete Tasks</h3>
-		{#if incompleteTasks.length === 0}
-			<div class="pt-12 pb-12">No incomplete tasks.</div>
-		{/if}
-		{#each incompleteTasks as task (task.id)}
-			<Task bind:task={task} on:delete={removeTask} />
-		{/each}
-		<h3>Completed Tasks</h3>
-		{#if completedTasks.length === 0}
-			<div class="pt-12 pb-12">No tasks completed.</div>
-		{/if}
-		{#each completedTasks as task (task.id)}
-			<Task bind:task={task} on:delete={removeTask} />
-		{/each}
 		<div class="tasks-bottom-buttons-container">
 			<button class="remove-all-tasks-button" on:click={removeAllTasks}>Remove All Tasks</button>
 		</div>
@@ -113,23 +86,22 @@
 </div>
 
 <style>
-	h2, h3 {
+	h2 {
 		color: #ff3e00;
 		text-transform: uppercase;
 		font-weight: 100;
-	}
-
-	h2 {
 		font-size: 3em;
 	}
 
-	h3 {
-		font-size: 2em;
+	.tasks-container {
+		/* width: 50%; */
+		width: 100%;
+		margin: 0 auto;
 	}
 
-	.tasks-container {
+	.add-task-form {
 		width: 50%;
-		margin: 0 auto;
+		margin: auto;
 	}
 
 	.add-task-container-row {
@@ -152,5 +124,11 @@
 
 	.add-task-button {
 		flex: 1;
+	}
+
+	.categories-container {
+		display: flex;
+		flex-direction: row;
+		overflow-x: scroll;
 	}
 </style>
