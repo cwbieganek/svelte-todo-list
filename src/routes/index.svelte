@@ -1,6 +1,9 @@
 <script lang="ts">
-	import Todo from './components/ToDo.svelte';
-	import type ITask from './components/ITask';
+	import Todo from '../components/ToDo.svelte';
+	import type ITask from '../components/ITask';
+
+	// Global CSS
+	import '../../static/global.css';
 
 	let name = "Chris";
 	let tasks: ITask[] = [

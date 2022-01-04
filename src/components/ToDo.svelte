@@ -71,7 +71,7 @@
 					<option value="other">Other</option>
 				</select>
 			</div>
-			<button class="add-task-button" disabled={newTaskDescription.replaceAll(" ", "") === ""} on:click={(e) => {addTask(newTaskDescription);}}>Add Task</button>
+			<button class="add-task-button" disabled={newTaskDescription.replace(/\s/g, "") === ""} on:click={(e) => {addTask(newTaskDescription);}}>Add Task</button>
 		</div>
 		<div class="categories-container">
 			<!-- TODO: Use #each instead -->
