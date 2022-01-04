@@ -1,3 +1,5 @@
+.svelte-kit/
+.DS_Store
 git-commits.txt
 public/build/
 .vscode/
