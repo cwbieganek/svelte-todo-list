@@ -48,6 +48,7 @@
 	{#each incompleteTasks as task (task.id)}
 		<Task bind:task={task} on:delete={removeTask} />
 	{/each}
+	<hr />
 	<h3 class="color-primary-500">Completed Tasks</h3>
 	{#if completedTasks.length === 0}
 		<div class="pt-12 pb-12">No tasks completed.</div>
@@ -55,6 +56,7 @@
 	{#each completedTasks as task (task.id)}
 		<Task bind:task={task} on:delete={removeTask} />
 	{/each}
+	<hr />
 </div>
 
 <style>
