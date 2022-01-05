@@ -91,6 +91,7 @@
 		/* width: 50%; */
 		width: 100%;
 		margin: 0 auto;
+		padding: 2em;
 	}
 
 	.add-task-form {

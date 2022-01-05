@@ -72,14 +72,15 @@
 
 	h2, h3 {
 		text-transform: uppercase;
-		font-weight: 100;
 	}
 
 	h2 {
 		font-size: 3em;
+		font-weight: 200;
 	}
 
 	h3 {
 		font-size: 2em;
+		font-weight: 100;
 	}
 </style>
