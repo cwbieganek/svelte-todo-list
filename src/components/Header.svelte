@@ -1,0 +1,16 @@
+<script lang="ts">
+	export let text: string;
+</script>
+
+<h2 class="color-primary-700">{text}</h2>
+
+<style>
+	h2 {
+		text-transform: uppercase;
+		font-weight: 100;
+		font-size: 3em;
+		/* Box-shadow based on: https://stackoverflow.com/questions/4561097/css-box-shadow-bottom-only */
+		box-shadow: 0 4px 3px -2px #BDBDBD;
+		margin-bottom: 1em;
+	}
+</style>

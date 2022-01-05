@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type ITask from './ITask';
 	import Category from './Category.svelte';
+	import Header from './Header.svelte';
 
 	export let name: string = "Someone";
 	export let tasks: ITask[] = [];
@@ -49,7 +50,7 @@
 </script>
 
 <div>
-	<h2 class="color-primary-700">{name}'s To Do List</h2>
+	<Header text={`${name}'s To Do List`} />
 	<div class="tasks-container">
 		<div class="add-task-form">
 			<div class="add-task-container-row">
@@ -86,16 +87,6 @@
 </div>
 
 <style>
-
-	h2 {
-		text-transform: uppercase;
-		font-weight: 100;
-		font-size: 3em;
-		/* Box-shadow based on: https://stackoverflow.com/questions/4561097/css-box-shadow-bottom-only */
-		box-shadow: 0 4px 3px -2px #BDBDBD;
-		margin-bottom: 1em;
-	}
-
 	.tasks-container {
 		/* width: 50%; */
 		width: 100%;
