@@ -64,14 +64,32 @@ button:focus {
 	border-color: #666;
 }
 
-.bg-1 {
-	background-color: #212121;
+/* 
+	Color palette generated with a primary color of #0289d1 here:
+	https://material.io/design/color/the-color-system.html#tools-for-picking-colors
+*/
+
+.color-primary-700 {
+	color: #0288D1;
 }
 
-.bg-2 {
-	background-color: #424242;
+.color-primary-500 {
+	color: #04aaf4;
 }
 
-.bg-3 {
-	background-color: #848484;
+.color-primary-300 {
+	color: #4fc3f7;
 }
+
+.color-complementary-800 {
+	color: #d14a02;
+}
+
+.color-complementary-600 {
+	color: #ec590b;
+}
+
+.color-complementary-400 {
+	color: #f8753a;
+}
+
