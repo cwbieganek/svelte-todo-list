@@ -62,12 +62,12 @@
 		display: flex;
 		flex-direction: column;
 		padding: 12px;
-		border-right: 1px solid gray;
+		border-left: 1px solid rgba(0, 0, 0, 0.20);
 		min-width: 800px;
 	}
 
 	.category:first-of-type {
-		border-left: 1px solid gray;
+		border-left: 1px solid rgba(0, 0, 0, 0.20);
 	}
 
 	h2, h3 {
