@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type ITask from './ITask';
-	import Category from './Category.svelte';
 	import Header from './Header.svelte';
-	// import SkewedHeader from './SkewedHeader.svelte';
+	import AddTaskForm from './AddTaskForm.svelte';
+	import Category from './Category.svelte';
 
 	export let name: string = "Someone";
 	export let tasks: ITask[] = [];
@@ -24,29 +24,21 @@
 		return task.category === 'other';
 	});
 
-	function addTask(description: string): void {
-		console.log(`Adding a task: ${description}.`);
+	function onTaskAdded(e: CustomEvent): void {
+		addTask(e.detail as ITask);
+	}
 
-		let newTask: ITask = {
-			id: nextTaskId,
-			description: description,
-			priority: newTaskPriority,
-			category: newTaskCategory,
-			complete: false
-		};
+	function addTask(task: ITask): void {
+		console.log(`Adding a task: ${task.description}.`);
 
-		tasks = [...tasks, newTask];
+		task.id = nextTaskId;
+
+		tasks = [...tasks, task];
 	}
 
 	function removeAllTasks(): void {
 		console.log(`Removing all ${tasks.length} tasks.`);
 		tasks = [];
-	}
-
-	function handleAddTaskInputKeystroke(e: KeyboardEvent): void {
-		if (e.key === "Enter") {
-			addTask(newTaskDescription);
-		}
 	}
 </script>
 
@@ -54,28 +46,7 @@
 	<Header text={`${name}'s To Do List`} />
 	<!-- <SkewedHeader text={`${name}'s To Do List`} /> -->
 	<div class="tasks-container">
-		<div class="add-task-form">
-			<div class="add-task-container-row">
-				<input class="add-task-input" placeholder="Enter a task description" bind:value={newTaskDescription} on:keypress={handleAddTaskInputKeystroke} />
-			</div>
-			<div class="add-task-container-row">
-				<label for="priority" style="font-weight: bold;">Priority:&nbsp;&nbsp;&nbsp;&nbsp;</label>
-				<select bind:value={newTaskPriority}>
-					<option value="low">Low</option>
-					<option value="medium" selected>Medium</option>
-					<option value="high">High</option>
-				</select>
-			</div>
-			<div class="add-task-container-row">
-				<label for="category" style="font-weight: bold;">Category:&nbsp;&nbsp;&nbsp;&nbsp;</label>
-				<select bind:value={newTaskCategory}>
-					<option value="personal" selected>Personal</option>
-					<option value="work">Work</option>
-					<option value="other">Other</option>
-				</select>
-			</div>
-			<button class="add-task-button" disabled={newTaskDescription.replace(/\s/g, "") === ""} on:click={(e) => {addTask(newTaskDescription);}}>Add Task</button>
-		</div>
+		<AddTaskForm on:task-added={onTaskAdded} />
 		<div class="categories-container">
 			<!-- TODO: Use #each instead -->
 			<Category bind:tasks={personalTasks} categoryName={'Personal Tasks'} />
@@ -94,33 +65,6 @@
 		width: 100%;
 		margin: 0 auto;
 		padding: 2em;
-	}
-
-	.add-task-form {
-		width: 50%;
-		margin: auto;
-	}
-
-	.add-task-container-row {
-		width: 100%;
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		margin-bottom: 10px;
-	}
-
-	.add-task-container-row input {
-		width: 70%;
-		margin-right: 3em;
-	}
-
-	.add-task-container-row label {
-		width: 6em;
-		text-align: left;
-	}
-
-	.add-task-button {
-		flex: 1;
 	}
 
 	.categories-container {
