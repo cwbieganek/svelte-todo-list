@@ -16,7 +16,7 @@ I tried to the break the application into as many small, modular components as p
 - Category
 - Task
 
-##
+## Demo
 
 To see the app in action, clone the repository and run the following commands:
 
