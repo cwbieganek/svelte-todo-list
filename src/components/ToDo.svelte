@@ -2,7 +2,7 @@
 	import type ITask from './ITask';
 	import Category from './Category.svelte';
 	import Header from './Header.svelte';
-	import SkewedHeader from './SkewedHeader.svelte';
+	// import SkewedHeader from './SkewedHeader.svelte';
 
 	export let name: string = "Someone";
 	export let tasks: ITask[] = [];
@@ -51,8 +51,8 @@
 </script>
 
 <div>
-	<!-- <Header text={`${name}'s To Do List`} /> -->
-	<SkewedHeader text={`${name}'s To Do List`} />
+	<Header text={`${name}'s To Do List`} />
+	<!-- <SkewedHeader text={`${name}'s To Do List`} /> -->
 	<div class="tasks-container">
 		<div class="add-task-form">
 			<div class="add-task-container-row">
