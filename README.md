@@ -1,6 +1,6 @@
 # SvelteKit To Do List App
 
-The classic To Do list app built using SvelteKit, TypeScript, and TailWind CSS. Has the following features:
+The classic To Do list app built using SvelteKit, TypeScript, and Tailwind CSS. Has the following features:
 
 - Multiple categories for tasks (personal, work, other)
 - Multiple priorities for tasks (low, medium, high)
