@@ -2,7 +2,7 @@
 	export let text: string;
 </script>
 
-<h2 class="color-primary-700">{text}</h2>
+<h2 class="color-primary-dark">{text}</h2>
 
 <style>
 	h2 {
