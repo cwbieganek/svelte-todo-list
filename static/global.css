@@ -92,3 +92,55 @@ button:focus {
 	color: #f8753a;
 }
 
+/* Primary and secondary foregroundcolors */
+
+.color-primary {
+	color: #0288D1;
+}
+
+.color-primary-light {
+	color: #5EB9FF;
+}
+
+.color-primary-dark {
+	color: #005C9F;
+}
+
+.color-secondary {
+	color: #02D1B2;
+}
+
+.color-secondary-light {
+	color: #62FFE4;
+}
+
+.color-secondary-dark {
+	color: #009f83;
+}
+
+/* Primary and secondary background colors */
+
+.bg-primary {
+	background-color: #0288D1;
+}
+
+.bg-primary-light {
+	background-color: #5EB9FF;
+}
+
+.bg-primary-dark {
+	color: #005C9F;
+}
+
+.bg-secondary {
+	background-color: #02D1B2;
+}
+
+.bg-secondary-light {
+	background-color: #62FFE4;
+}
+
+.bg-secondary-dark {
+	background-color: #009f83;
+}
+
