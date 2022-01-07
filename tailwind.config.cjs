@@ -4,6 +4,7 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
+				primaryBase: '#0289d1',
 				primary: {
 					50: '#e1f5fe',
 					100: '#b3e5fc',
@@ -12,15 +13,16 @@ module.exports = {
 					400: '#2ab7f6',
 					500: '#04aaf4',
 					600: '#049ce5',
-					700: '#0289d1',  // This is the default shade for primary.
+					700: '#0289d1',  // This is the default shade (base) for primary.
 					800: '#0278bd',
 					900: '#01589b'
 				},
+				secondaryBase: '#02d1b2',
 				secondary: {
 					50: '#def7f3',
 					100: '#adebde',
 					200: '#72dfc9',
-					300: '#02d1b2',  // This is the default shade for secondary.
+					300: '#02d1b2',  // This is the default shade (base) for secondary.
 					400: '#00c5a0',
 					500: '#00b78f',
 					600: '#00a981',
