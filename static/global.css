@@ -64,21 +64,9 @@ button:focus {
 }
 
 /* 
-	Color palette generated with a primary color of #0289d1 here:
+	Color palette generated with a primary color of #0289d1, and a secondary color of #02d1b2 here:
 	https://material.io/design/color/the-color-system.html#tools-for-picking-colors
 */
-
-.color-primary-700 {
-	color: #0288D1;
-}
-
-.color-primary-500 {
-	color: #04aaf4;
-}
-
-.color-primary-300 {
-	color: #4fc3f7;
-}
 
 .color-complementary-800 {
 	color: #d14a02;
@@ -91,56 +79,3 @@ button:focus {
 .color-complementary-400 {
 	color: #f8753a;
 }
-
-/* Primary and secondary foregroundcolors */
-
-.color-primary {
-	color: #0288D1;
-}
-
-.color-primary-light {
-	color: #5EB9FF;
-}
-
-.color-primary-dark {
-	color: #005C9F;
-}
-
-.color-secondary {
-	color: #02D1B2;
-}
-
-.color-secondary-light {
-	color: #62FFE4;
-}
-
-.color-secondary-dark {
-	color: #009f83;
-}
-
-/* Primary and secondary background colors */
-
-.bg-primary {
-	background-color: #0288D1;
-}
-
-.bg-primary-light {
-	background-color: #5EB9FF;
-}
-
-.bg-primary-dark {
-	background-color: #005C9F;
-}
-
-.bg-secondary {
-	background-color: #02D1B2;
-}
-
-.bg-secondary-light {
-	background-color: #62FFE4;
-}
-
-.bg-secondary-dark {
-	background-color: #009f83;
-}
-
