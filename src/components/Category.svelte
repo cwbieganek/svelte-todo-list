@@ -40,8 +40,8 @@
 </script>
 
 <div class="category">
-	<h2 class="color-primary-700">{categoryName}</h2>
-	<h3 class="color-primary-500">Incomplete Tasks</h3>
+	<h2 class="text-primary-base">{categoryName}</h2>
+	<h3 class="text-primary-500">Incomplete Tasks</h3>
 	{#if incompleteTasks.length === 0}
 		<div class="pt-12 pb-12">No incomplete tasks.</div>
 	{/if}
@@ -49,7 +49,7 @@
 		<Task bind:task={task} on:delete={removeTask} />
 	{/each}
 	<hr />
-	<h3 class="color-primary-500">Completed Tasks</h3>
+	<h3 class="text-primary-500">Completed Tasks</h3>
 	{#if completedTasks.length === 0}
 		<div class="pt-12 pb-12">No tasks completed.</div>
 	{/if}
